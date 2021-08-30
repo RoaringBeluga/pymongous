@@ -1,4 +1,4 @@
-def get_database():
+def get_database(dbname):
     from pymongo import MongoClient
     import pymongo
 
@@ -10,11 +10,16 @@ def get_database():
     client = MongoClient(CONNECTION_STRING)
 
     # Create the database for our example (we will use the same database throughout the tutorial
-    return client['user_shopping_list']
+    return client[dbname]
     
 # This is added so that many files can reuse the function get_database()
 if __name__ == "__main__":    
     
     # Get the database
-    dbname = get_database()
-    print(f"DB name: {dbname}")
+    db_link = get_database('poings')
+    collection_link = db_link['Poing']
+    
+    nards = collection_link.find()
+    
+    for gibs in nards:
+        print(gibs)
